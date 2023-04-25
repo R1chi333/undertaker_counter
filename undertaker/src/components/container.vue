@@ -1,12 +1,12 @@
 <script setup>
-import questionOne from './questionOne.vue'
-import questionTwo from './questionTwo.vue'
+import charts from './charts.vue'
+import questions from './questions.vue'
 </script>
 
 <template>
   <div id="con">
-    <questionOne />
-    <questionTwo />
+    <charts/>
+    <questions/>
   </div>
 </template>
 <style scoped>

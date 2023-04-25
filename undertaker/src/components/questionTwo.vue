@@ -1,11 +1,44 @@
 <template>
-  <div id="questionOne">
-    <h3>CHOICE TWO</h3>
-    <p>CAUSE:</p>
-  </div>
+  <transition name="up">
+    <div v-if="play" id="questionTwo">
+      <h3>CHOICE TWO</h3>
+      <p>CAUSE:</p>
+      <p>YEAR:</p>
+      <p>SEX:</p>
+      <p>RACE/ETHNICITY:</p>
+      <button @click="$emit('toggle-play')">BUTTON</button>
+    </div>
+  </transition>
 </template>
+
+<script>
+export default {
+  props: {
+    play: Boolean
+  }
+}
+</script>
+
 <style scoped>
-#questionOne {
+.up {
+  animation-duration: 2s;
+  animation-fill-mode: forwards;
+}
+@keyframes up {
+  from {
+    transform: translateY(0);
+  }
+  to {
+    transform: translateY(-40vw);
+  }
+}
+button {
+  width: 5vw;
+  height: 5vw;
+  margin-top: 5vw;
+}
+#questionTwo {
+  position: relative;
   height: 38vw;
   width: 33vw;
   background-color: #cecece;
@@ -13,10 +46,21 @@
   display: inline-block;
   font-family: 'Barrio';
   vertical-align: top;
+  text-align: center;
+  z-index: 1;
 }
 h3 {
-  text-align: center;
   color: #272727;
   font-size: 4vw;
+  margin: 0;
+  margin-top: 3vw;
+  margin-bottom: 2vw;
+}
+p {
+  font-size: 1vw;
+  font-family: 'Bevan';
+  margin: 0;
+  margin-top: 1vw;
+  color: #272727;
 }
 </style>
