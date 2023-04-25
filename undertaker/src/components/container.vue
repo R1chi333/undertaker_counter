@@ -5,8 +5,8 @@ import questions from './questions.vue'
 
 <template>
   <div id="con">
-    <charts/>
-    <questions/>
+    <charts />
+    <questions />
   </div>
 </template>
 <style scoped>

@@ -1,7 +1,8 @@
 <template>
-    <div id="conn">
-        <p>charts and shit idk</p>
-    </div>
+  <div id="conn">
+    <p>charts and shit idk</p>
+    <button @click="$emit('toggle-off')">OKAY</button>
+  </div>
 </template>
 <style scoped>
 #conn {

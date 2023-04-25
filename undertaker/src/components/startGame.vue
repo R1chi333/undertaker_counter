@@ -41,6 +41,7 @@ h2 {
   color: #272727;
   z-index: 3;
   transform: rotate(3.5deg);
+  font-size: 1.8vw;
 }
 #tomb {
   width: 25vw;

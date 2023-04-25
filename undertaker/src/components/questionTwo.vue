@@ -1,5 +1,5 @@
 <template>
-  <transition name="up">
+  <transition>
     <div v-if="play" id="questionTwo">
       <h3>CHOICE TWO</h3>
       <p>CAUSE:</p>
@@ -20,7 +20,12 @@ export default {
 </script>
 
 <style scoped>
-.up {
+.v-enter-active,
+.v-leave-active {
+  animation: up 2s forwards;
+}
+
+#questionTwo {
   animation-duration: 2s;
   animation-fill-mode: forwards;
 }
@@ -36,6 +41,7 @@ button {
   width: 5vw;
   height: 5vw;
   margin-top: 5vw;
+  font-size: 0.5vw;
 }
 #questionTwo {
   position: relative;
