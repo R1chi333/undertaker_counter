@@ -28,6 +28,6 @@ export default {
 </script>
 <style scoped>
 div {
-  overflow-y: hidden;
+  /* overflow-y: hidden; */
 }
 </style>

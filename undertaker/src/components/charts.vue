@@ -1,6 +1,11 @@
+<script setup>
+import chartOne from './chartOne.vue'
+</script>
+
 <template>
   <div id="conn">
     <p>charts and shit idk</p>
+    <chart-one />
     <button @click="$emit('toggle-off')">OKAY</button>
   </div>
 </template>
