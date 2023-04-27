@@ -1,13 +1,13 @@
-<template>
+<template onload="fetchRandomRecord()">
   <transition mode="out-in">
-    <div v-if="play" id="questionOne">
+    <div v-if="play" id="questionOne" @load="fetchRandomRecord">
       <h3>CHOICE ONE</h3>
       <p>CAUSE: {{ cause }}</p>
       <p>YEAR: {{ year }}</p>
       <p>SEX: {{ sex }}</p>
       <p>RACE/ETHNICITY: {{ race }}</p>
       <button @click="$emit('toggle-play')">BUTTON</button>
-      <button @click="$emit('fetchRandomRecord')">Fetch random record</button>
+      <button @click="fetchRandomRecord">Fetch random record</button>
     </div>
   </transition>
 </template>
@@ -32,15 +32,15 @@ export default {
     const data = await response.json();
     this.deaths = data;
   },
-  // methods: {
-  //   fetchRandomRecord() {
-  //     const randomIndex = Math.floor(Math.random() * this.deaths.length);
-  //     this.cause = this.deaths[randomIndex].leading_cause;
-  //     this.year = this.deaths[randomIndex].year;
-  //     this.sex = this.deaths[randomIndex].sex;
-  //     this.race = this.deaths[randomIndex].race_ethnicity;
-  //   }
-  // }
+  methods: {
+    fetchRandomRecord() {
+      const randomIndex = Math.floor(Math.random() * this.deaths.length);
+      this.cause = this.deaths[randomIndex].leading_cause;
+      this.year = this.deaths[randomIndex].year;
+      this.sex = this.deaths[randomIndex].sex;
+      this.race = this.deaths[randomIndex].race_ethnicity;
+    }
+  }
 };
 
 </script>
