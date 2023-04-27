@@ -21,7 +21,18 @@ export default {
   },
   methods: {
     togglePlay() {
-      this.play = !this.play
+      if (this.play === true){
+        this.play = false
+      } else{
+        this.play = true
+      }
+    },
+    fetchRandomRecord() {
+      const randomIndex = Math.floor(Math.random() * this.deaths.length);
+      this.cause = this.deaths[randomIndex].leading_cause;
+      this.year = this.deaths[randomIndex].year;
+      this.sex = this.deaths[randomIndex].sex;
+      this.race = this.deaths[randomIndex].race_ethnicity;
     }
   }
 }
