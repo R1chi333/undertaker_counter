@@ -1,25 +1,21 @@
 <template>
   <div>
-    <pie-chart :data="chartData" :options="chartOptions"
-      :cause=" cause"
+    <pie-chart
+      :data="chartData"
+      :options="chartOptions"
+      :cause="cause"
       :causeTwo="causeTwo"
-      :death = "death"
-      :deathTwo="deathTwo"></pie-chart>
+      :death="death"
+      :deathTwo="deathTwo"
+    ></pie-chart>
   </div>
 </template>
 
 <script>
 import { Pie } from 'vue-chartjs'
-import {
-    Chart as ChartJS,
-    Title,
-    Tooltip,
-    Legend,
-    ArcElement,
-    CategoryScale
-  } from 'chart.js'
-  
-  ChartJS.register(Title, Tooltip, Legend, ArcElement, CategoryScale)
+import { Chart as ChartJS, Title, Tooltip, Legend, ArcElement, CategoryScale } from 'chart.js'
+
+ChartJS.register(Title, Tooltip, Legend, ArcElement, CategoryScale)
 
 export default {
   components: {
@@ -28,22 +24,22 @@ export default {
   props: {
     cause: {
       type: String,
-      default: "",
+      default: ''
     },
     causeTwo: {
       type: String,
-      default: "",
+      default: ''
     },
     death: {
       type: String,
-      default: "",
+      default: ''
     },
     deathTwo: {
       type: String,
-      default: "",
-    },
+      default: ''
+    }
   },
-  data () {
+  data() {
     return {
       chartData: {
         labels: [this.cause, this.causeTwo],

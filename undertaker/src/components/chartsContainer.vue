@@ -1,33 +1,21 @@
-
 <script setup>
 import chartOne from './chartOne.vue'
-import chartTwo from './chartTwo.vue';
+import chartTwo from './chartTwo.vue'
 </script>
 <template>
-    <div id="chartsCon">
-        <p>chart go here idk</p>
-        <chartOne
-        :cause=" cause"
-        :causeTwo="causeTwo"
-        :death= "death"
-        :deathTwo="deathTwo"
-        />
-        <chartTwo
-        :cause=" cause"
-        :causeTwo="causeTwo"
-        :death= "death"
-        :deathTwo="deathTwo"
-        />
-    </div>
+  <div id="chartsCon">
+    <chartOne :cause="cause" :causeTwo="causeTwo" :death="death" :deathTwo="deathTwo" />
+    <chartTwo :cause="cause" :causeTwo="causeTwo" :death="death" :deathTwo="deathTwo" />
+  </div>
 </template>
 <style>
-#chartsCon{
-    background-color: rgb(167, 167, 167);
-    width: 75vw;
-    height: 45vw;
-    border: solid;
-    border-color: rgb(112, 112, 112);
-    border-width: .5vw;
+#chartsCon {
+  background-color: rgb(167, 167, 167);
+  width: 75vw;
+  height: 45vw;
+  border: solid;
+  border-color: rgb(112, 112, 112);
+  border-width: 0.5vw;
 }
 </style>
 <script>
@@ -36,20 +24,20 @@ export default {
   props: {
     cause: {
       type: String,
-      default: "",
+      default: ''
     },
     causeTwo: {
       type: String,
-      default: "",
+      default: ''
     },
     death: {
       type: String,
-      default: "",
+      default: ''
     },
     deathTwo: {
       type: String,
-      default: "",
-    },
-  },
+      default: ''
+    }
+  }
 }
 </script>
