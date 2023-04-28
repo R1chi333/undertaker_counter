@@ -78,36 +78,6 @@ export default {
     this.fetchData();
   },
   methods: {
-    optionOne(){
-      if(this.death >= this.deathTwo){
-        this.score++;
-        this.correct = true;
-        this.moveOn = "NEXT";
-      } else{
-        this.score = 0;
-        this.correct = false;
-        this.moveOn = "game over"
-      }
-    },
-    optionTwo(){
-      if(this.deathTwo >= this.death){
-        this.score++;
-        this.correct = true;
-        this.moveOn = "NEXT";
-      } else{
-        this.score = 0;
-        this.correct = false;
-        this.moveOn = "game over"
-      }
-    },
-    addChildComponent() {
-      this.showChildComponent = true
-    },
-    removeChildComponent() {
-      if(this.correct === true){
-        this.showChildComponent = false
-      }
-    },
     async fetchData() {
       try {
         const response = await fetch(
@@ -131,6 +101,36 @@ export default {
           this.deathTwo = data[randomIndexTwo].deaths;
       } catch (error) {
         console.log(error);
+      }
+    },
+    optionOne(){
+      if(parseInt(this.death) >= parseInt(this.deathTwo)){
+        this.score++;
+        this.correct = true;
+        this.moveOn = "NEXT";
+      } else{
+        this.score = 0;
+        this.correct = false;
+        this.moveOn = "game over"
+      }
+    },
+    optionTwo(){
+      if(parseInt(this.deathTwo) >= parseInt(this.death)){
+        this.score++;
+        this.correct = true;
+        this.moveOn = "NEXT";
+      } else{
+        this.score = 0;
+        this.correct = false;
+        this.moveOn = "game over"
+      }
+    },
+    addChildComponent() {
+      this.showChildComponent = true
+    },
+    removeChildComponent() {
+      if(this.correct === true){
+        this.showChildComponent = false
       }
     },
   },
