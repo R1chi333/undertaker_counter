@@ -1,94 +1,62 @@
-<template onload="fetchRandomRecord()">
-  <transition mode="out-in">
-    <div v-if="play" id="questionOne" @load="fetchRandomRecord">
-      <h3>CHOICE ONE</h3>
-      <p>CAUSE: {{ cause }}</p>
-      <p>YEAR: {{ year }}</p>
-      <p>SEX: {{ sex }}</p>
-      <p>RACE/ETHNICITY: {{ race }}</p>
-      <button @click="$emit('toggle-play')">BUTTON</button>
-      <button @click="fetchRandomRecord">Fetch random record</button>
+<template>
+  <div>
+    <div id="graveOne">
+     <img src="/grave1.png" alt="">
+     <div id="textbox">
+      <h3>CAUSE OF DEATH:</h3>
+      <p>{{ cause }}</p>
+      <h3>YEAR:</h3>
+      <p>{{ year  }}</p>
+      <h3>SEX:</h3>
+      <p>{{ sex }}</p>
+      <h3>RACE/ETHNICITY:</h3>
+      <p>{{ race }}</p>
+     </div>
     </div>
-  </transition>
+  </div>
 </template>
-
-<script>
-
-export default {
-  props: {
-    play: Boolean
-  },
-  data() {
-    return {
-      deaths: [],
-      cause: '',
-      year: '',
-      sex: '',
-      race: ''
-    };
-  },
-  async created() {
-    const response = await fetch('https://data.cityofnewyork.us/resource/jb7j-dtam.json');
-    const data = await response.json();
-    this.deaths = data;
-  },
-  methods: {
-    fetchRandomRecord() {
-      const randomIndex = Math.floor(Math.random() * this.deaths.length);
-      this.cause = this.deaths[randomIndex].leading_cause;
-      this.year = this.deaths[randomIndex].year;
-      this.sex = this.deaths[randomIndex].sex;
-      this.race = this.deaths[randomIndex].race_ethnicity;
-    }
-  }
-};
-
-</script>
-
 <style scoped>
-.v-enter-active,
-.v-leave-active {
-  animation: up 2s forwards;
+h3,p{
+  margin: 0%;
 }
-
-@keyframes up {
-  from {
-    transform: translateY(0);
-  }
-  to {
-    transform: translateY(-40vw);
-  }
+#textbox{
+color: black;
+position: absolute;
+top: 16vw;
+left: 20%;
+font-family: 'Barrio';
+font-size: 1.5vw;
+width: 19vw;
 }
-button {
-  width: 5vw;
-  height: 5vw;
-  margin-top: 5vw;
-  font-size: 0.5vw;
+img{
+  width: 45vw;
 }
-#questionOne {
-  position: relative;
-  height: 38vw;
-  width: 33vw;
-  background-color: #cecece;
-  border: 1vw solid #696969;
-  display: inline-block;
-  font-family: 'Barrio';
-  vertical-align: top;
-  text-align: center;
-  z-index: 1;
-}
-h3 {
-  color: #272727;
-  font-size: 4vw;
-  margin: 0;
-  margin-top: 3vw;
-  margin-bottom: 2vw;
-}
-p {
-  font-size: 1vw;
-  font-family: 'Bevan';
-  margin: 0;
-  margin-top: 1vw;
-  color: #272727;
+p{
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  font-size: .89vw;
+  font-weight: bolder;
 }
 </style>
+
+<script>
+export default {
+  props: {
+    cause: {
+      type: String,
+      default: "",
+    },
+    year: {
+      type: String,
+      default: "",
+    },
+    sex: {
+      type: String,
+      default: "",
+    },
+    race: {
+      type: String,
+      default: "",
+    },
+  },
+};
+</script>

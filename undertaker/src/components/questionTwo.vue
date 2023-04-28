@@ -1,96 +1,61 @@
 <template>
-  <transition>
-    <div v-if="play" id="questionTwo">
-      <h3>CHOICE TWO</h3>
-      <p>CAUSE: {{ cause }}</p>
-      <p>YEAR: {{ year }}</p>
-      <p>SEX: {{ sex }}</p>
-      <p>RACE/ETHNICITY: {{ race }}</p>
-      <button @click="$emit('toggle-play')">BUTTON</button>
-      <button @click="fetchRandomRecord">Fetch random record</button>
+  <div>
+    <div id="graveTwo">
+     <img src="/grave2.png" alt="">
+     <div id="textbox">
+      <h3>CAUSE OF DEATH:</h3>
+      <p>{{ causeTwo }}</p>
+      <h3>YEAR:</h3>
+      <p>{{ yearTwo  }}</p>
+      <h3>SEX:</h3>
+      <p>{{ sexTwo }}</p>
+      <h3>RACE/ETHNICITY:</h3>
+      <p>{{ raceTwo }}</p>
+     </div>
     </div>
-  </transition>
+  </div>
 </template>
-
+<style scoped>
+h3,p{
+  margin: 0%;
+}
+#textbox{
+color: black;
+position: absolute;
+top: 17vw;
+right: 20%;
+font-family: 'Barrio';
+font-size: 1.5vw;
+width: 19vw;
+}
+img{
+  width: 45vw;
+}
+p{
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  font-size: .89vw;
+  font-weight: bolder;
+}
+</style>
 <script>
 export default {
   props: {
-    play: Boolean
+    causeTwo: {
+      type: String,
+      default: "",
+    },
+    yearTwo: {
+      type: String,
+      default: "",
+    },
+    sexTwo: {
+      type: String,
+      default: "",
+    },
+    raceTwo: {
+      type: String,
+      default: "",
+    },
   },
-  data() {
-    return {
-      deaths: [],
-      cause: '',
-      year: '',
-      sex: '',
-      race: ''
-    };
-  },
-  async created() {
-    const response = await fetch('https://data.cityofnewyork.us/resource/jb7j-dtam.json');
-    const data = await response.json();
-    this.deaths = data;
-  },
-  methods: {
-    fetchRandomRecord() {
-      const randomIndex = Math.floor(Math.random() * this.deaths.length);
-      this.cause = this.deaths[randomIndex].leading_cause;
-      this.year = this.deaths[randomIndex].year;
-      this.sex = this.deaths[randomIndex].sex;
-      this.race = this.deaths[randomIndex].race_ethnicity;
-    }
-  }
 };
 </script>
-
-<style scoped>
-.v-enter-active,
-.v-leave-active {
-  animation: up 2s forwards;
-}
-
-#questionTwo {
-  animation-duration: 2s;
-  animation-fill-mode: forwards;
-}
-@keyframes up {
-  from {
-    transform: translateY(0);
-  }
-  to {
-    transform: translateY(-40vw);
-  }
-}
-button {
-  width: 5vw;
-  height: 5vw;
-  margin-top: 5vw;
-  font-size: 0.5vw;
-}
-#questionTwo {
-  position: relative;
-  height: 38vw;
-  width: 33vw;
-  background-color: #cecece;
-  border: 1vw solid #696969;
-  display: inline-block;
-  font-family: 'Barrio';
-  vertical-align: top;
-  text-align: center;
-  z-index: 1;
-}
-h3 {
-  color: #272727;
-  font-size: 4vw;
-  margin: 0;
-  margin-top: 3vw;
-  margin-bottom: 2vw;
-}
-p {
-  font-size: 1vw;
-  font-family: 'Bevan';
-  margin: 0;
-  margin-top: 1vw;
-  color: #272727;
-}
-</style>
