@@ -25,7 +25,7 @@ import counter from './counter.vue'
       :sexTwo="sexTwo"
       :raceTwo="raceTwo"
       />
-      <button @click="removeChildComponent();fetchData();restart();"  id="newRound">{{ moveOn }}</button>
+      <button @click="removeChildComponent();fetchData();"  id="newRound">{{ moveOn }}</button>
     </div>
     
     <div id="questions">
@@ -110,11 +110,6 @@ export default {
       } catch (error) {
         console.log(error);
       }
-      }
-    },
-    restart(){
-      if(this.correct === false){
-        location.reload();
       }
     },
     optionOne(){
