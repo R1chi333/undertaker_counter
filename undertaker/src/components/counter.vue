@@ -5,9 +5,11 @@
 #score{
     color: white;
     position: fixed;
-    top: 0%;
+    top: 5%;
     left: 50%;
   transform: translate(-50%, -50%);
+  font-family: 'Barrio';
+  font-size: 2vw;
 }
 </style>
 

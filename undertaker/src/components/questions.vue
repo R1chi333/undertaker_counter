@@ -17,8 +17,15 @@ import counter from './counter.vue'
       :causeTwo="causeTwo"
       :death= "death"
       :deathTwo="deathTwo"
+      :score="score"
+      :year="year"
+      :sex="sex"
+      :race="race"
+      :yearTwo="yearTwo"
+      :sexTwo="sexTwo"
+      :raceTwo="raceTwo"
       />
-      <button @click="removeChildComponent();fetchData()"  id="newRound">{{ moveOn }}</button>
+      <button @click="removeChildComponent();fetchData();restart();"  id="newRound">{{ moveOn }}</button>
     </div>
     
     <div id="questions">
@@ -79,7 +86,8 @@ export default {
   },
   methods: {
     async fetchData() {
-      try {
+      if(this.correct === true){
+        try {
         const response = await fetch(
           "https://data.cityofnewyork.us/resource/jb7j-dtam.json"
         );
@@ -102,6 +110,12 @@ export default {
       } catch (error) {
         console.log(error);
       }
+      }
+    },
+    restart(){
+      if(this.correct === false){
+        location.reload();
+      }
     },
     optionOne(){
       if(parseInt(this.death) >= parseInt(this.deathTwo)){
@@ -109,9 +123,8 @@ export default {
         this.correct = true;
         this.moveOn = "NEXT";
       } else{
-        this.score = 0;
         this.correct = false;
-        this.moveOn = "game over"
+        this.moveOn = "GAME OVER"
       }
     },
     optionTwo(){
@@ -120,9 +133,8 @@ export default {
         this.correct = true;
         this.moveOn = "NEXT";
       } else{
-        this.score = 0;
         this.correct = false;
-        this.moveOn = "game over"
+        this.moveOn = "GAME OVER"
       }
     },
     addChildComponent() {
@@ -144,7 +156,29 @@ export default {
   top: 90%;
   left: 50%;
   transform: translate(-50%, -50%);
+  padding: 1vw;
+  background-color: white;
+  --b: 3px;   /* border thickness */
+  --s: .45em; /* size of the corner */
+  --color: #483c34;
+  
+  padding: calc(.5em + var(--s)) calc(.9em + var(--s));
+  color: var(--color);
+  --_p: var(--s);
+  background:
+    conic-gradient(from 90deg at var(--b) var(--b),#0000 90deg,var(--color) 0)
+    var(--_p) var(--_p)/calc(100% - var(--b) - 2*var(--_p)) calc(100% - var(--b) - 2*var(--_p));
+  transition: .3s linear, color 0s, background-color 0s;
+  outline: var(--b) solid #0000;
+  outline-offset: .6em;
 
+  border: 0;
+  font-family: 'Bevan';
+  font-size: .9vw;
+  transition-duration: .2s;
+}
+#newRound:hover{
+  font-size: 1vw;
 }
 #chartsContainer{
   z-index: 999;

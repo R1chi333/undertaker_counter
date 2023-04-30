@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div id="pie-chart">
     <pie-chart
       :data="chartData"
       :options="chartOptions"
@@ -42,15 +42,26 @@ export default {
   data() {
     return {
       chartData: {
-        labels: [this.cause, this.causeTwo],
+        labels: ["Option One", "Option Two"],
         datasets: [
           {
-            backgroundColor: ['#41B883', '#E46651'],
+            backgroundColor: ['#483c34','#614f45'],
             data: [this.death, this.deathTwo]
           }
         ]
       },
       chartOptions: {
+        plugins: { 
+      legend: {
+        labels: {
+          color: "#483c34", 
+          font: {
+            size: 14,
+            family: 'Bevan',
+          }
+        }
+      }
+    },
         responsive: true,
         maintainAspectRatio: false
       }
@@ -58,3 +69,9 @@ export default {
   }
 }
 </script>
+<style>
+#pie-chart{
+  width: 30%;
+  padding: 3%;
+}
+</style>
