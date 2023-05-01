@@ -10,47 +10,41 @@ import counter from './counter.vue'
 
 <template>
   <div>
-    <counter :score="score"/>
+    <counter :score="score" />
     <div id="chartsContainer" v-if="showChildComponent">
-      <chartsContainer @remove="removeChildComponent" 
-      :cause=" cause"
-      :causeTwo="causeTwo"
-      :death= "death"
-      :deathTwo="deathTwo"
-      :score="score"
-      :year="year"
-      :sex="sex"
-      :race="race"
-      :yearTwo="yearTwo"
-      :sexTwo="sexTwo"
-      :raceTwo="raceTwo"
+      <chartsContainer
+        @remove="removeChildComponent"
+        :cause="cause"
+        :causeTwo="causeTwo"
+        :death="death"
+        :deathTwo="deathTwo"
+        :score="score"
+        :year="year"
+        :sex="sex"
+        :race="race"
+        :yearTwo="yearTwo"
+        :sexTwo="sexTwo"
+        :raceTwo="raceTwo"
       />
-      <button @click="removeChildComponent();fetchData();"  id="newRound">{{ moveOn }}</button>
+      <button @click="removeChildComponent(), fetchData()" id="newRound">
+        {{ moveOn }}
+      </button>
     </div>
-    
+
     <div id="questions">
-      <questionOne
-      :cause="cause"
-      :year="year"
-      :sex="sex"
-      :race="race"/>
-      <questionTwo
-      :causeTwo="causeTwo"
-      :yearTwo="yearTwo"
-      :sexTwo="sexTwo"
-      :raceTwo="raceTwo"
-      />
+      <questionOne :cause="cause" :year="year" :sex="sex" :race="race" />
+      <questionTwo :causeTwo="causeTwo" :yearTwo="yearTwo" :sexTwo="sexTwo" :raceTwo="raceTwo" />
     </div>
     <div id="buttons" class="buttons">
-      <div @click="addChildComponent(); optionOne()" id="buttonOne" class="buttons">
-        <buttonOne/>
+      <div @click="addChildComponent(), optionOne()" id="buttonOne" class="buttons">
+        <buttonOne />
       </div>
-      <div @click="addChildComponent();optionTwo()" id="buttonTwo" class="buttons">
-        <buttonTwo/>
+      <div @click="addChildComponent(), optionTwo()" id="buttonTwo" class="buttons">
+        <buttonTwo />
       </div>
     </div>
     <div id="dirt">
-      <dirtChart/>
+      <dirtChart />
     </div>
   </div>
 </template>
@@ -65,141 +59,142 @@ export default {
   },
   data() {
     return {
-      moveOn: "NEXT",
+      moveOn: 'NEXT',
       correct: true,
       score: 0,
-      cause: "",
-      year: "",
-      sex: "",
-      race: "",
-      causeTwo: "",
-      yearTwo: "",
-      sexTwo: "",
-      raceTwo: "",
-      death: "",
-      deathTwo: "",
+      cause: '',
+      year: '',
+      sex: '',
+      race: '',
+      causeTwo: '',
+      yearTwo: '',
+      sexTwo: '',
+      raceTwo: '',
+      death: '',
+      deathTwo: '',
       showChildComponent: false
-    };
+    }
   },
   mounted() {
-    this.fetchData();
+    this.fetchData()
   },
   methods: {
     async fetchData() {
-      if(this.correct === true){
+      if (this.correct === true) {
         try {
-        const response = await fetch(
-          "https://data.cityofnewyork.us/resource/jb7j-dtam.json"
-        );
-        const data = await response.json();
+          const response = await fetch('https://data.cityofnewyork.us/resource/jb7j-dtam.json')
+          const data = await response.json()
 
-        const randomIndexOne = Math.floor(Math.random() * data.length);
+          const randomIndexOne = Math.floor(Math.random() * data.length)
 
-          this.cause = data[randomIndexOne].leading_cause;
-          this.year = data[randomIndexOne].year;
-          this.sex = data[randomIndexOne].sex;
-          this.race = data[randomIndexOne].race_ethnicity;
-          this.death = data[randomIndexOne].deaths;
+          this.cause = data[randomIndexOne].leading_cause
+          this.year = data[randomIndexOne].year
+          this.sex = data[randomIndexOne].sex
+          this.race = data[randomIndexOne].race_ethnicity
+          this.death = data[randomIndexOne].deaths
 
-          const randomIndexTwo = Math.floor(Math.random() * data.length);
-          this.causeTwo = data[randomIndexTwo].leading_cause;
-          this.yearTwo = data[randomIndexTwo].year;
-          this.sexTwo = data[randomIndexTwo].sex;
-          this.raceTwo = data[randomIndexTwo].race_ethnicity;
-          this.deathTwo = data[randomIndexTwo].deaths;
-      } catch (error) {
-        console.log(error);
-      }
+          const randomIndexTwo = Math.floor(Math.random() * data.length)
+          this.causeTwo = data[randomIndexTwo].leading_cause
+          this.yearTwo = data[randomIndexTwo].year
+          this.sexTwo = data[randomIndexTwo].sex
+          this.raceTwo = data[randomIndexTwo].race_ethnicity
+          this.deathTwo = data[randomIndexTwo].deaths
+        } catch (error) {
+          console.log(error)
+        }
       }
     },
-    optionOne(){
-      if(parseInt(this.death) >= parseInt(this.deathTwo)){
-        this.score++;
-        this.correct = true;
-        this.moveOn = "NEXT";
-      } else{
-        this.correct = false;
-        this.moveOn = "GAME OVER"
+    optionOne() {
+      if (this.death === '.') {
+        this.death = 0
+      }
+      if (this.deathTwo === '.') {
+        this.deathTwo = 0
+      }
+      if (parseInt(this.death) >= parseInt(this.deathTwo)) {
+        this.score++
+        this.correct = true
+        this.moveOn = 'NEXT'
+      } else {
+        this.correct = false
+        this.moveOn = 'GAME OVER'
       }
     },
-    optionTwo(){
-      if(parseInt(this.deathTwo) >= parseInt(this.death)){
-        this.score++;
-        this.correct = true;
-        this.moveOn = "NEXT";
-      } else{
-        this.correct = false;
-        this.moveOn = "GAME OVER"
+    optionTwo() {
+      if (parseInt(this.deathTwo) >= parseInt(this.death)) {
+        this.score++
+        this.correct = true
+        this.moveOn = 'NEXT'
+      } else {
+        this.correct = false
+        this.moveOn = 'GAME OVER'
       }
     },
     addChildComponent() {
       this.showChildComponent = true
     },
     removeChildComponent() {
-      if(this.correct === true){
+      if (this.correct === true) {
         this.showChildComponent = false
       }
-    },
-  },
-};
-
+    }
+  }
+}
 </script>
 
 <style scoped>
-#newRound{
+#newRound {
   position: absolute;
   top: 90%;
   left: 50%;
   transform: translate(-50%, -50%);
   padding: 1vw;
   background-color: white;
-  --b: 3px;   /* border thickness */
-  --s: .45em; /* size of the corner */
+  --b: 3px; /* border thickness */
+  --s: 0.45em; /* size of the corner */
   --color: #483c34;
-  
-  padding: calc(.5em + var(--s)) calc(.9em + var(--s));
+
+  padding: calc(0.5em + var(--s)) calc(0.9em + var(--s));
   color: var(--color);
   --_p: var(--s);
-  background:
-    conic-gradient(from 90deg at var(--b) var(--b),#0000 90deg,var(--color) 0)
-    var(--_p) var(--_p)/calc(100% - var(--b) - 2*var(--_p)) calc(100% - var(--b) - 2*var(--_p));
-  transition: .3s linear, color 0s, background-color 0s;
+  background: conic-gradient(from 90deg at var(--b) var(--b), #0000 90deg, var(--color) 0) var(--_p)
+    var(--_p) / calc(100% - var(--b) - 2 * var(--_p)) calc(100% - var(--b) - 2 * var(--_p));
+  transition: 0.3s linear, color 0s, background-color 0s;
   outline: var(--b) solid #0000;
-  outline-offset: .6em;
+  outline-offset: 0.6em;
 
   border: 0;
   font-family: 'Bevan';
-  font-size: .9vw;
-  transition-duration: .2s;
+  font-size: 0.9vw;
+  transition-duration: 0.2s;
 }
-#newRound:hover{
+#newRound:hover {
   font-size: 1vw;
 }
-#chartsContainer{
+#chartsContainer {
   z-index: 999;
   position: absolute;
   top: 25vw;
   left: 50%;
   transform: translate(-50%, -50%);
 }
-#buttons{
-z-index: 3;
-position: relative;
-display: flex;
-margin-top: -20%;
-
+#buttons {
+  z-index: 3;
+  position: relative;
+  display: flex;
+  margin-top: -20%;
 }
-.buttons{
+.buttons {
   margin-left: 6%;
 }
-#dirt{
+#dirt {
   z-index: 1;
   width: 100vw;
   position: relative;
   z-index: 2;
   margin-top: -14%;
 }
-#questions{
+#questions {
   display: flex;
   justify-content: center;
   margin-top: -3%;
