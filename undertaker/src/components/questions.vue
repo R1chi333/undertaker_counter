@@ -36,12 +36,12 @@ import counter from './counter.vue'
       <questionTwo :causeTwo="causeTwo" :yearTwo="yearTwo" :sexTwo="sexTwo" :raceTwo="raceTwo" />
     </div>
     <div id="buttons" class="buttons">
-      <div @click="addChildComponent(), optionOne()" id="buttonOne" class="buttons">
+      <button @click="addChildComponent(), optionOne()" id="buttonOne" class="buttons">
         <buttonOne />
-      </div>
-      <div @click="addChildComponent(), optionTwo()" id="buttonTwo" class="buttons">
+      </button>
+      <button @click="addChildComponent(), optionTwo()" id="buttonTwo" class="buttons">
         <buttonTwo />
-      </div>
+      </button>
     </div>
     <div id="dirt">
       <dirtChart />
