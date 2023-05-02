@@ -70,7 +70,7 @@ export default {
         labels: {
           color: "#483c34", 
           font: {
-            size: 18 ,
+            size: '17em' ,
             family: 'Bevan',
           }
         }
@@ -82,7 +82,7 @@ export default {
       color: "#483c34",
       font: {
         family: 'Bevan',
-        size: 14,
+        size: '15em',
       },
     },
       grid: {
@@ -105,8 +105,6 @@ export default {
     }
   }
 }
-
-
 </script>
 
 <style>
