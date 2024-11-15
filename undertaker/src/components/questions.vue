@@ -102,6 +102,11 @@ export default {
         } catch (error) {
           console.log(error)
         }
+      } else{
+        this.correct = true;
+        this.score = 0;
+        this.removeChildComponent()
+        this.fetchData();
       }
     },
     optionOne() {
